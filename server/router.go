@@ -11,6 +11,7 @@ import (
 	"github.com/alist-org/alist/v3/server/handles"
 	"github.com/alist-org/alist/v3/server/middlewares"
 	"github.com/alist-org/alist/v3/server/static"
+	wlImpl "github.com/alist-org/alist/v3/server/wl_impl"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
@@ -95,6 +96,7 @@ func Init(e *gin.Engine) {
 	public.Any("/archive_extensions", handles.ArchiveExtensions)
 
 	_fs(auth.Group("/fs"))
+	wlImpl.SyncCloudTask(api.Group("/wl/sync_cloud"))
 	_task(auth.Group("/task", middlewares.AuthNotGuest))
 	_label(auth.Group("/label"))
 	_labelFileBinding(auth.Group("/label_file_binding"))
