@@ -49,6 +49,7 @@ type CloudTask struct {
 	stop          bool
 	Stoped        bool
 	running       bool
+	failRetry     int
 }
 
 func (t *CloudTask) GetName() string {
@@ -292,6 +293,7 @@ func (t *CloudTask) procOss() (bool, error) {
 
 func (t *CloudTask) clearUploadTask() int {
 	count := 0
+	failCount := 0
 	uploadTasks := fs.UploadTaskManager.GetAll()
 	for _, task := range uploadTasks {
 		/*
@@ -307,7 +309,28 @@ func (t *CloudTask) clearUploadTask() int {
 		} else {
 			count++
 		}
+		if task.GetState() == tache.StateFailed {
+			failCount++
+		}
 	}
+	if failCount > 0 {
+		if count == failCount {
+
+			for _, task := range uploadTasks {
+				if _, ok := t.uploadTaskMap[task.ID]; ok {
+					fs.UploadTaskManager.Remove(task.ID)
+					delete(t.uploadTaskMap, task.ID)
+				}
+			}
+			t.startAfter = t.TaskInfo.StartAfter
+			t.Status = fmt.Sprintf("fail retry: %d", t.failRetry)
+			t.failRetry++
+			time.Sleep(time.Duration(5*t.failRetry) * time.Second)
+		}
+	} else {
+		t.failRetry = 1
+	}
+
 	return count
 }
 
