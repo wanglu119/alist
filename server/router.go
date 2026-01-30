@@ -96,7 +96,7 @@ func Init(e *gin.Engine) {
 	public.Any("/archive_extensions", handles.ArchiveExtensions)
 
 	_fs(auth.Group("/fs"))
-	wlImpl.SyncCloudTask(api.Group("/wl/sync_cloud"))
+	wlImpl.SyncCloudTask(auth.Group("/wl/sync_cloud"))
 	_task(auth.Group("/task", middlewares.AuthNotGuest))
 	_label(auth.Group("/label"))
 	_labelFileBinding(auth.Group("/label_file_binding"))
