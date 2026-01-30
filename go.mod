@@ -14,6 +14,7 @@ require (
 	github.com/Xhofe/rateg v0.0.0-20230728072201-251a4e1adad4
 	github.com/alist-org/gofakes3 v0.0.7
 	github.com/alist-org/times v0.0.0-20240721124654-efa0c7d3ad92
+	github.com/aliyun/alibabacloud-oss-go-sdk-v2 v1.3.0
 	github.com/aliyun/aliyun-oss-go-sdk v3.0.2+incompatible
 	github.com/avast/retry-go v3.0.0+incompatible
 	github.com/aws/aws-sdk-go v1.55.5
@@ -65,6 +66,7 @@ require (
 	github.com/t3rm1n4l/go-mega v0.0.0-20240219080617-d494b6a8ace7
 	github.com/u2takey/ffmpeg-go v0.5.0
 	github.com/upyun/go-sdk/v3 v3.0.4
+	github.com/volcengine/ve-tos-golang-sdk/v2 v2.9.0
 	github.com/winfsp/cgofuse v1.5.1-0.20230130140708-f87f5db493b5
 	github.com/xhofe/tache v0.1.5
 	github.com/xhofe/wopan-sdk-go v0.1.3
